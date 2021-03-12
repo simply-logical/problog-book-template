@@ -1,0 +1,18 @@
+- file: src/problog_book_template
+
+- part: Bayesian Networks
+  chapters:
+  - file: src/text/bayesian_networks-mnb
+  - url: https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html
+    title: 'Static Slides (Markdown NB)'
+  - file: src/text/bayesian_networks-jnb
+  - url: https://problog-template.simply-logical.space/slides/bayesian_networks-jnb.slides.html
+    title: 'Static Slides (Jupyter NB)'
+  - file: src/text/bayesian_networks-pnb
+
+- part: See Also
+  chapters:
+  - url: https://simply-logical.space/
+    title: 'Simply Logical Organisation'
+  - url: https://github.com/simply-logical/problog-book-template/
+    title: 'GitHub Template'
