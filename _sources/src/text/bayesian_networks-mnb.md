@@ -12,7 +12,7 @@ kernelspec:
   name: python3
 ---
 
-+++ {"slideshow": {"slide_type": "skip"}}
++++ {"slideshow": {"slide_type": "skip"}, "tags": ["purge-cell"], "jupyter": {"source_hidden": true, "outputs_hidden": true}, "collapsed": true}
 
 (sec:problog:md)=
 
@@ -26,6 +26,11 @@ kernelspec:
 This page is based on the [*Bayesian networks*] ProbLog tutorial, which
 is executed from within Python using the [*ProbLog library*].
 :::
+
+[*Bayesian networks*]: https://dtai.cs.kuleuven.be/problog/tutorial/basic/02_bayes.html
+[*ProbLog library*]: https://dtai.cs.kuleuven.be/problog/tutorial/advanced/01_python_interface.html
+
++++ {"slideshow": {"slide_type": "skip"}, "tags": ["purge-cell"], "jupyter": {"source_hidden": true, "outputs_hidden": true}, "collapsed": true}
 
 :::{admonition} Content format
 :class: attention
@@ -60,8 +65,6 @@ then open [RISE] by clicking the {fa}`chart-bar` button located in the top bar
 of the Jupyter Notebook interface.
 :::
 
-[*ProbLog library*]: https://dtai.cs.kuleuven.be/problog/tutorial/advanced/01_python_interface.html
-[*Bayesian networks*]: https://dtai.cs.kuleuven.be/problog/tutorial/basic/02_bayes.html
 [*Markdown Notebook*]: https://jupyterbook.org/file-types/myst-notebooks.html
 [`ipywidgets`]: https://ipywidgets.readthedocs.io/
 [notebook]: bayesian_networks-jnb
@@ -74,15 +77,32 @@ of the Jupyter Notebook interface.
 [slides-link]: https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html
 [RISE]: https://rise.readthedocs.io/en/stable/
 
++++ {"slideshow": {"slide_type": "subslide"}, "tags": ["remove-cell", "purge-cell"], "jupyter": {"source_hidden": true, "outputs_hidden": true}, "collapsed": true}
 
-+++ {"slideshow": {"slide_type": "skip"}}
+:::{note}
+These slides are also available as a [book page][bp1], which explains how to
+launch them as a Jupyter Notebook or interactive slides.
+:::
 
-```{tip}
+[bp1]: .
+
++++ {"slideshow": {"slide_type": "skip"}, "tags": ["remove-cell"], "jupyter": {"source_hidden": true, "outputs_hidden": true}, "collapsed": true}
+
+:::{note}
+This Jupyter Notebook is also available as a [book page][bp2], which explains
+how to launch this content as *static* and *interactive* slides.
+:::
+
+[bp2]: .
+
++++ {"slideshow": {"slide_type": "skip"}, "tags": ["purge-cell"], "jupyter": {"source_hidden": true, "outputs_hidden": true}, "collapsed": true}
+
+:::{tip}
 This page includes a number of Python cells holding code needed to set up
 ProbLog ipywidgets.
 You can reveal their content by clicking the {fa}`plus-circle` buttons, which
 appear towards the right edge of this page.
-```
+:::
 
 ```{code-cell} python3
 ---
@@ -129,20 +149,24 @@ def get_widget(default_programme):
         # layout=Layout(margin='4px 0px 0px 90px'),
         button_style='info'
     )
+    out = widgets.Output()
 
     def evaluate(obj):
         problog_programme = textbox.value.strip()
         if problog_programme:
             p = PrologString(problog_programme)
             d = get_evaluatable().create_from(p).evaluate()
-            plot_outcome(d)
+            with out:
+                out.clear_output(wait=True)
+                plot_outcome(d)
+                plt.show()
         else:
             d = {'error': 'No ProbLog programme given'}
         return d
     button.on_click(evaluate)
     button._click_handlers(button)  # pre-click the button
 
-    return widgets.VBox([textbox, button])
+    return widgets.VBox([textbox, button, out])
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
@@ -191,7 +215,7 @@ We obtain the following ProbLog program.
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: 'skip'
+  slide_type: ''
 ---
 probabilistic_facts = (
 """0.7::burglary.
@@ -215,7 +239,7 @@ query(earthquake)."""
 ---
 tags: [hide-input]
 slideshow:
-  slide_type: ''
+  slide_type: subslide
 ---
 get_widget(probabilistic_facts)
 ```
@@ -232,13 +256,11 @@ When pressing 'Evaluate', ProbLog2 calculates the probability of there being a *
 
 While the above is a correct encoding of the given Bayesian network, it is perhaps not very intuitive due to the auxiliary atoms. Fortunately, ProbLog2 offers some syntactic sugar called **probabilistic clauses** to encode this in a more readable way. Above, we encoded the information that the conditional probability of an *alarm* given a *burglary* and an *earthquake* equals 0.9 using the rule `alarm :- burglary, earthquake, p_alarm1`, plus the probabilistic fact `0.9::p_alarm1`. We can replace both with a single probabilistic clause of the form `0.9::alarm :- burglary, earthquake`. This should be read as: if *burglary* and *earthquake* are true, this causes *alarm* to become true with probability 0.9 if there is a *burglary* and an *earthquake*. As this example illustrates, a probabilistic clause has a body, just like regular ProbLog rules, and a head. The difference is that now, the head is annotated with a probability. By also using probabilistic clauses for the other rules in the ProbLog encoding of the Bayesian network, we get the following program.
 
-
-
 ```{code-cell} python3
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: skip
+  slide_type: subslide
 ---
 probabilistic_clauses = (
 """0.7::burglary.
@@ -286,7 +308,7 @@ Suppose there are $N$ people and each person independently *calls* the police wi
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: skip
+  slide_type: subslide
 ---
 first_order = (
 """person(john).
@@ -339,7 +361,7 @@ Since the random variables in the Bayesian network are all Boolean, we only need
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: skip
+  slide_type: subslide
 ---
 annotated_disjunctions = (
 """person(john).

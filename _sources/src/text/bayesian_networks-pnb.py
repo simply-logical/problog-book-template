@@ -5,15 +5,15 @@
 #     text_representation:
 #       extension: .py
 #       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.8.0
+#   rise:
+#     start_slideshow_at: beginning
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
 
-# %% [markdown] slideshow={"slide_type": "skip"}
+# %% [markdown] slideshow={"slide_type": "skip"} tags=["purge-cell"] jupyter={"source_hidden": true, "outputs_hidden": true}
 # (sec:problog:py)=
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -25,9 +25,13 @@
 # is executed from within Python using the [*ProbLog library*].
 # :::
 #
+# [*Bayesian networks*]: https://dtai.cs.kuleuven.be/problog/tutorial/basic/02_bayes.html
+# [*ProbLog library*]: https://dtai.cs.kuleuven.be/problog/tutorial/advanced/01_python_interface.html
+
+# %% [markdown] slideshow={"slide_type": "skip"} tags=["purge-cell"] jupyter={"source_hidden": true, "outputs_hidden": true}
 # :::{admonition} Content format
 # :class: attention
-# This page is written in the [*Markdown Notebook*] format.
+# This page is written in the [*Percent Notebook*] format.
 # The ProbLog content is displayed with [`ipywidgets`].
 # Alternatively, see the [Jupyter Notebook version][notebook] of the
 # *Bayesian Networks* tutorial for an example of executing ProbLog code
@@ -38,18 +42,13 @@
 # *Launch Menu* that appears after hovering the mouse cursor over the
 # {fa}`rocket` icon shown in the top bar.
 # Note that Google Colab execution environment is not available for pages
-# written in the [*Markdown Notebook*] format.
+# written in the [*Percent Notebook*] format.
 # You can also **enable the widgets** to work directly on this page with
 # [Thebe] by activating {fa}`play`&nbsp;*Live Code* from the
 # {fa}`rocket`&nbsp;*Launch Menu*.
 #
-# <!--https://sphinx-panels.readthedocs.io/en/latest/#link-badgeshttps://sphinx-panels.readthedocs.io/en/latest/#link-badges-->
-# <!--{link-badge}`https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html,Static Slides,link,badge-info badge-pill text-white`-->
 # In addition to this book page and the corresponding Jupyter Notebook,
-# *static* and *interactive* [reveal.js] slides are built from the page source.
-# The static slides can be accessed with the [Static Slides (Markdown NB)] link
-# listed in the left panel (the table of content) or with this button
-# [![View Slides][slides-badge]][slides-link].
+# *interactive* [reveal.js] slides are built from the page source.
 # To launch the interactive version of the slides (with executable code boxes),
 # you need to open this page as a Jupyter Notebook in Binder -- either via
 # the {fa}`rocket`&nbsp;*Launch Menu* or using this button
@@ -58,29 +57,32 @@
 # of the Jupyter Notebook interface.
 # :::
 #
-# [*ProbLog library*]: https://dtai.cs.kuleuven.be/problog/tutorial/advanced/01_python_interface.html
-# [*Bayesian networks*]: https://dtai.cs.kuleuven.be/problog/tutorial/basic/02_bayes.html
-# [*Markdown Notebook*]: https://jupyterbook.org/file-types/myst-notebooks.html
+# [*Percent Notebook*]: https://jupyterbook.org/file-types/jupytext.html
 # [`ipywidgets`]: https://ipywidgets.readthedocs.io/
 # [notebook]: bayesian_networks-jnb
 # [Thebe]: https://jupyterbook.org/interactive/launchbuttons.html#live-interactive-pages-with-thebelab
 # [reveal.js]: https://github.com/hakimel/reveal.js/
-# [Static Slides (Markdown NB)]: https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html
 # [binder-badge]: https://mybinder.org/badge_logo.svg
-# [binder-link]: https://mybinder.org/v2/gh/simply-logical/problog-book-template/master?urlpath=tree/src/text/bayesian_networks-mnb.md
-# [slides-badge]: https://img.shields.io/badge/view-slides-blue.svg
-# [slides-link]: https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html
+# [binder-link]: https://mybinder.org/v2/gh/simply-logical/problog-book-template/master?urlpath=tree/src/text/bayesian_networks-pnb.py
 # [RISE]: https://rise.readthedocs.io/en/stable/
 
-# %% [markdown] slideshow={"slide_type": "skip"}
-# ```{tip}
+# %% [markdown] slideshow={"slide_type": "skip"} tags=["remove-cell"] jupyter={"source_hidden": true, "outputs_hidden": true}
+# :::{note}
+# This Jupyter Notebook is also available as a [book page][bp2], which explains
+# how to launch this content as *interactive* slides.
+# :::
+#
+# [bp2]: .
+
+# %% [markdown] slideshow={"slide_type": "skip"} tags=["purge-cell"] jupyter={"source_hidden": true, "outputs_hidden": true}
+# :::{tip}
 # This page includes a number of Python cells holding code needed to set up
 # ProbLog ipywidgets.
 # You can reveal their content by clicking the {fa}`plus-circle` buttons, which
 # appear towards the right edge of this page.
-# ```
+# :::
 
-# %% tags=["hide-cell", "thebe-init"] slideshow={"slide_type": "skip"}
+# %% tags=["hide-input", "thebe-init"] slideshow={"slide_type": "skip"}
 import matplotlib.pyplot as plt
 
 import ipywidgets as widgets
@@ -90,7 +92,7 @@ from problog.program import PrologString
 from problog import get_evaluatable
 
 
-# %% tags=["hide-cell", "thebe-init"] slideshow={"slide_type": "skip"}
+# %% tags=["hide-input", "thebe-init"] slideshow={"slide_type": "skip"}
 def plot_outcome(pl_dict):
     x = list(pl_dict.keys())
     y = [pl_dict[key] for key in x]
@@ -115,19 +117,24 @@ def get_widget(default_programme):
         # layout=Layout(margin='4px 0px 0px 90px'),
         button_style='info'
     )
+    out = widgets.Output()
 
     def evaluate(obj):
         problog_programme = textbox.value.strip()
         if problog_programme:
             p = PrologString(problog_programme)
             d = get_evaluatable().create_from(p).evaluate()
-            plot_outcome(d)
+            with out:
+                out.clear_output(wait=True)
+                plot_outcome(d)
+                plt.show()
         else:
             d = {'error': 'No ProbLog programme given'}
         return d
     button.on_click(evaluate)
+    button._click_handlers(button)  # pre-click the button
 
-    return widgets.VBox([textbox, button])
+    return widgets.VBox([textbox, button, out])
 
 
 # %% [markdown] slideshow={"slide_type": "subslide"}
@@ -167,7 +174,7 @@ def get_widget(default_programme):
 # We obtain the following ProbLog program.
 
 # %% tags=["hide-input", "thebe-init"] slideshow={"slide_type": ""}
-get_widget(
+probabilistic_facts = (
 """0.7::burglary.
 0.2::earthquake.
 0.9::p_alarm1.
@@ -184,6 +191,9 @@ query(burglary).
 query(earthquake)."""
 )
 
+# %% tags=["hide-input"] slideshow={"slide_type": "subslide"}
+get_widget(probabilistic_facts)
+
 # %% [markdown] slideshow={"slide_type": ""}
 # When pressing 'Evaluate', ProbLog2 calculates the probability of there being a *burglary* or an *earthquake*, given the evidence that the *alarm* rang. The resulting marginals are: $P(burglary)=0.9896$ and $P(earthquake)=0.2275$.
 
@@ -194,7 +204,7 @@ query(earthquake)."""
 # While the above is a correct encoding of the given Bayesian network, it is perhaps not very intuitive due to the auxiliary atoms. Fortunately, ProbLog2 offers some syntactic sugar called **probabilistic clauses** to encode this in a more readable way. Above, we encoded the information that the conditional probability of an *alarm* given a *burglary* and an *earthquake* equals 0.9 using the rule `alarm :- burglary, earthquake, p_alarm1`, plus the probabilistic fact `0.9::p_alarm1`. We can replace both with a single probabilistic clause of the form `0.9::alarm :- burglary, earthquake`. This should be read as: if *burglary* and *earthquake* are true, this causes *alarm* to become true with probability 0.9 if there is a *burglary* and an *earthquake*. As this example illustrates, a probabilistic clause has a body, just like regular ProbLog rules, and a head. The difference is that now, the head is annotated with a probability. By also using probabilistic clauses for the other rules in the ProbLog encoding of the Bayesian network, we get the following program.
 
 # %% tags=["hide-input", "thebe-init"] slideshow={"slide_type": "subslide"}
-get_widget(
+probabilistic_clauses = (
 """0.7::burglary.
 0.2::earthquake.
 
@@ -206,6 +216,9 @@ evidence(alarm,true).
 query(burglary).
 query(earthquake)."""
 )
+
+# %% tags=["hide-input"] slideshow={"slide_type": "subslide"}
+get_widget(probabilistic_clauses)
 
 # %% [markdown] slideshow={"slide_type": ""}
 # As you can verify by pressing 'Evaluate', this returns the same marginals as the 'plain' ProbLog encoding: $P(burglary)=0.9896$ and $P(earthquake)=0.2275$. This is not a coincidence: the two programs are equivalent (but the program with probabilistic clauses has the advantage of not needing any auxiliary atoms).
@@ -224,7 +237,7 @@ query(earthquake)."""
 # Suppose there are $N$ people and each person independently *calls* the police with a certain probability, depending on the *alarm* ringing or not: if the *alarm* rings, the probability of *calling* is 0.8, otherwise it is 0.1. This can be modelled as follows. We again use probabilistic clauses and show the case $N=2$ (two people).
 
 # %% tags=["hide-input", "thebe-init"] slideshow={"slide_type": "subslide"}
-get_widget(
+first_order = (
 """person(john).
 person(mary).
 
@@ -245,9 +258,13 @@ query(burglary).
 query(earthquake)."""
 )
 
-# %% [markdown] slideshow={"slide_type": "subslide"}
+# %% tags=["hide-input"] slideshow={"slide_type": "subslide"}
+get_widget(first_order)
+
+# %% [markdown] slideshow={"slide_type": ""}
 # When pressing 'Evaluate', ProbLog2 calculates the probability of there being a *burglary* or an *earthquake*, given the evidence that both *john* and *mary* *called*. We obtain $P(burglary)=0.981939$ and $P(earthquake)=0.226851$.
-#
+
+# %% [markdown] slideshow={"slide_type": "subslide"}
 # In general, any Boolean Bayesian network can be modeled in ProbLog using the above methodology. This can also be extended to non-Boolean Bayesian networks (in which some variables can take more than two possible values), by using annotated disjunctions with multiple atoms in the head.
 
 # %% [markdown] slideshow={"slide_type": "slide"}
@@ -257,7 +274,7 @@ query(earthquake)."""
 # Since the random variables in the Bayesian network are all Boolean, we only need a single literal in the head of the rules. We can extend the Bayesian network to have a multi-valued variable by indicating the severity of the *earthquake*. The literal `earthquake` now has three possible values `none`, `mild`, `heavy` instead of previously two (no or yes). The probabilities of each value is denoted by the **annotated disjunction** in `0.01::earthquake(heavy); 0.19::earthquake(mild); 0.8::earthquake(none)`. An annotated disjunction is similar to a probabilistic disjunction, but with a different head. Instead of it being one atom annotated with a probability, it is now a disjunction of atoms each annotated with a probability.
 
 # %% tags=["hide-input", "thebe-init"] slideshow={"slide_type": "subslide"}
-get_widget(
+annotated_disjunctions = (
 """person(john).
 person(mary).
 
@@ -279,6 +296,9 @@ evidence(calls(mary),true).
 query(burglary).
 query(earthquake(_))."""
 )
+
+# %% tags=["hide-input"] slideshow={"slide_type": "subslide"}
+get_widget(annotated_disjunctions)
 
 # %% [markdown] slideshow={"slide_type": "subslide"}
 # [Annotated disjunctions documentation]
