@@ -94,6 +94,7 @@ from problog import get_evaluatable
 def plot_outcome(pl_dict):
     x = list(pl_dict.keys())
     y = [pl_dict[key] for key in x]
+    x = [str(key) for key in x]
     plt.barh(x, y, height=.5)
     plt.xlim([0, 1.15])
     plt.ylim([-.5, len(x) - .5])
