@@ -404,7 +404,7 @@ appear towards the right edge of this page.</p>
 </li>
 </ul>
 <p>We obtain the following ProbLog program.</p>
-<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilistic_facts</span> <span class="o">=</span> <span class="p">(</span>
 <span class="sd">&quot;&quot;&quot;0.7::burglary.</span>
@@ -426,7 +426,7 @@ appear towards the right edge of this page.</p>
 </div>
 </div>
 </div>
-<div class="cell tag_hide-input docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_problog</span><span class="p">(</span><span class="n">probabilistic_facts</span><span class="p">)</span>
 </pre></div>
@@ -441,7 +441,7 @@ appear towards the right edge of this page.</p>
 <div class="section" id="probabilistic-clauses">
 <h2>Probabilistic clauses<a class="headerlink" href="#probabilistic-clauses" title="Permalink to this headline">¶</a></h2>
 <p>While the above is a correct encoding of the given Bayesian network, it is perhaps not very intuitive due to the auxiliary atoms. Fortunately, ProbLog2 offers some syntactic sugar called <strong>probabilistic clauses</strong> to encode this in a more readable way. Above, we encoded the information that the conditional probability of an <em>alarm</em> given a <em>burglary</em> and an <em>earthquake</em> equals 0.9 using the rule <code class="docutils literal notranslate"><span class="pre">alarm</span> <span class="pre">:-</span> <span class="pre">burglary,</span> <span class="pre">earthquake,</span> <span class="pre">p_alarm1</span></code>, plus the probabilistic fact <code class="docutils literal notranslate"><span class="pre">0.9::p_alarm1</span></code>. We can replace both with a single probabilistic clause of the form <code class="docutils literal notranslate"><span class="pre">0.9::alarm</span> <span class="pre">:-</span> <span class="pre">burglary,</span> <span class="pre">earthquake</span></code>. This should be read as: if <em>burglary</em> and <em>earthquake</em> are true, this causes <em>alarm</em> to become true with probability 0.9 if there is a <em>burglary</em> and an <em>earthquake</em>. As this example illustrates, a probabilistic clause has a body, just like regular ProbLog rules, and a head. The difference is that now, the head is annotated with a probability. By also using probabilistic clauses for the other rules in the ProbLog encoding of the Bayesian network, we get the following program.</p>
-<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probabilistic_clauses</span> <span class="o">=</span> <span class="p">(</span>
 <span class="sd">&quot;&quot;&quot;0.7::burglary.</span>
@@ -459,7 +459,7 @@ appear towards the right edge of this page.</p>
 </div>
 </div>
 </div>
-<div class="cell tag_hide-input docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_problog</span><span class="p">(</span><span class="n">probabilistic_clauses</span><span class="p">)</span>
 </pre></div>
@@ -477,7 +477,7 @@ appear towards the right edge of this page.</p>
 <p>To illustrate the use of <em>first-order</em> ProbLog programs, we show below a first-order extension of the <em>Alarm</em> example.</p>
 <p>digraph alarm2 { burglary -&gt; alarm; earthquake -&gt; alarm; alarm -&gt; “calls(john)”; alarm -&gt; “calls(…)”; alarm -&gt; “calls(mary)”; }<br />
 Suppose there are <span class="math notranslate nohighlight">\(N\)</span> people and each person independently <em>calls</em> the police with a certain probability, depending on the <em>alarm</em> ringing or not: if the <em>alarm</em> rings, the probability of <em>calling</em> is 0.8, otherwise it is 0.1. This can be modelled as follows. We again use probabilistic clauses and show the case <span class="math notranslate nohighlight">\(N=2\)</span> (two people).</p>
-<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_order</span> <span class="o">=</span> <span class="p">(</span>
 <span class="sd">&quot;&quot;&quot;person(john).</span>
@@ -503,7 +503,7 @@ Suppose there are <span class="math notranslate nohighlight">\(N\)</span> people
 </div>
 </div>
 </div>
-<div class="cell tag_hide-input docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_problog</span><span class="p">(</span><span class="n">first_order</span><span class="p">)</span>
 </pre></div>
@@ -519,7 +519,7 @@ Suppose there are <span class="math notranslate nohighlight">\(N\)</span> people
 <div class="section" id="annotated-disjunctions-dealing-with-multi-valued-variables">
 <h2>Annotated disjunctions: Dealing with multi-valued variables<a class="headerlink" href="#annotated-disjunctions-dealing-with-multi-valued-variables" title="Permalink to this headline">¶</a></h2>
 <p>Since the random variables in the Bayesian network are all Boolean, we only need a single literal in the head of the rules. We can extend the Bayesian network to have a multi-valued variable by indicating the severity of the <em>earthquake</em>. The literal <code class="docutils literal notranslate"><span class="pre">earthquake</span></code> now has three possible values <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">mild</span></code>, <code class="docutils literal notranslate"><span class="pre">heavy</span></code> instead of previously two (no or yes). The probabilities of each value is denoted by the <strong>annotated disjunction</strong> in <code class="docutils literal notranslate"><span class="pre">0.01::earthquake(heavy);</span> <span class="pre">0.19::earthquake(mild);</span> <span class="pre">0.8::earthquake(none)</span></code>. An annotated disjunction is similar to a probabilistic disjunction, but with a different head. Instead of it being one atom annotated with a probability, it is now a disjunction of atoms each annotated with a probability.</p>
-<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotated_disjunctions</span> <span class="o">=</span> <span class="p">(</span>
 <span class="sd">&quot;&quot;&quot;person(john).</span>
@@ -547,7 +547,7 @@ Suppose there are <span class="math notranslate nohighlight">\(N\)</span> people
 </div>
 </div>
 </div>
-<div class="cell tag_hide-input docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_problog</span><span class="p">(</span><span class="n">annotated_disjunctions</span><span class="p">)</span>
 </pre></div>
