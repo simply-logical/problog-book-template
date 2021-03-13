@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bayesian Networks (Markdown NB) &#8212; Interactive ProbLog&lt;br&gt;Book Example</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/problog-book-template.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="http://problog-template.simply-logical.space/src/text/bayesian_networks-mnb.html" />
+    <link rel="shortcut icon" href="../../_static/wikidata.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bayesian Networks (Jupyter NB)" href="bayesian_networks-jnb.html" />
+    <link rel="prev" title="Interactive ProbLog Book Example" href="../problog_book_template.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="http://problog-template.simply-logical.space/src/text/bayesian_networks-mnb.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Bayesian Networks (Markdown NB)" />
+<meta property="og:description" content="Bayesian Networks (Markdown NB)  Note  This page is based on the Bayesian networks ProbLog tutorial, which is executed from within Python using the ProbLog libr" />
+<meta property="og:image"       content="http://problog-template.simply-logical.space/_static/wikidata.svg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/wikidata.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Interactive ProbLog<br>Book Example</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../problog_book_template.html">
+   Interactive ProbLog Book Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Bayesian Networks
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Bayesian Networks (Markdown NB)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html">
+   Static Slides (Markdown NB)
+   <i class="fas fa-external-link-alt">
+   </i>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bayesian_networks-jnb.html">
+   Bayesian Networks (Jupyter NB)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-jnb.slides.html">
+   Static Slides (Jupyter NB)
+   <i class="fas fa-external-link-alt">
+   </i>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bayesian_networks-pnb.html">
+   Bayesian Networks (Percent NB)
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  See Also
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://simply-logical.space/">
+   Simply Logical Organisation
+   <i class="fas fa-external-link-alt">
+   </i>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/simply-logical/problog-book-template/">
+   GitHub Template
+   <i class="fas fa-external-link-alt">
+   </i>
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/src/text/bayesian_networks-mnb.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/src/text/bayesian_networks-mnb.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/simply-logical/problog-book-template"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/simply-logical/problog-book-template/issues/new?title=Issue%20on%20page%20%2Fsrc/text/bayesian_networks-mnb.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/simply-logical/problog-book-template/edit/master/src/text/bayesian_networks-mnb.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/simply-logical/problog-book-template/master?urlpath=tree/src/text/bayesian_networks-mnb.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probabilistic-facts">
+   Probabilistic facts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probabilistic-clauses">
+   Probabilistic clauses
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-order">
+   First-order
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#annotated-disjunctions-dealing-with-multi-valued-variables">
+   Annotated disjunctions: Dealing with multi-valued variables
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="bayesian-networks-markdown-nb">
+<span id="sec-problog-md"></span><h1>Bayesian Networks (Markdown NB)<a class="headerlink" href="#bayesian-networks-markdown-nb" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page is based on the <a class="reference external" href="https://dtai.cs.kuleuven.be/problog/tutorial/basic/02_bayes.html"><em>Bayesian networks</em></a> ProbLog tutorial, which
+is executed from within Python using the <a class="reference external" href="https://dtai.cs.kuleuven.be/problog/tutorial/advanced/01_python_interface.html"><em>ProbLog library</em></a>.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Content format</p>
+<p>This page is written in the <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html"><em>Markdown Notebook</em></a> format.
+The ProbLog content is displayed with <a class="reference external" href="https://ipywidgets.readthedocs.io/"><code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code></a>.
+Alternatively, see the <a class="reference internal" href="bayesian_networks-jnb.html"><span class="doc std std-doc">Jupyter Notebook version</span></a> of the
+<em>Bayesian Networks</em> tutorial for an example of executing ProbLog code
+directly from Python.</p>
+<p>You can execute the code blocks enclosed below by launching this page as a
+Jupyter Notebook with MyBinder – this option is available from the
+<em>Launch Menu</em> that appears after hovering the mouse cursor over the
+<span class="fa fa-rocket"></span> icon shown in the top bar.
+Note that Google Colab execution environment is not available for pages
+written in the <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html"><em>Markdown Notebook</em></a> format.
+You can also <strong>enable the widgets</strong> to work directly on this page with
+<a class="reference external" href="https://jupyterbook.org/interactive/launchbuttons.html#live-interactive-pages-with-thebelab">Thebe</a> by activating <span class="fa fa-play"></span> <em>Live Code</em> from the
+<span class="fa fa-rocket"></span> <em>Launch Menu</em>.</p>
+<!--https://sphinx-panels.readthedocs.io/en/latest/#link-badgeshttps://sphinx-panels.readthedocs.io/en/latest/#link-badges-->
+<!--{link-badge}`https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html,Static Slides,link,badge-info badge-pill text-white`-->
+<p>In addition to this book page and the corresponding Jupyter Notebook,
+<em>static</em> and <em>interactive</em> <a class="reference external" href="https://github.com/hakimel/reveal.js/">reveal.js</a> slides are built from the page source.
+The static slides can be accessed with the <a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html">Static Slides (Markdown NB)</a> link
+listed in the left panel (the table of content) or with this button
+<a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html"><img alt="View Slides" src="https://img.shields.io/badge/view-slides-blue.svg" /></a>.
+To launch the interactive version of the slides (with executable code boxes),
+you need to open this page as a Jupyter Notebook in Binder – either via
+the <span class="fa fa-rocket"></span> <em>Launch Menu</em> or using this button
+<a class="reference external" href="https://mybinder.org/v2/gh/simply-logical/problog-book-template/master?urlpath=tree/src/text/bayesian_networks-mnb.md"><img alt="Open in Binder" src="https://mybinder.org/badge_logo.svg" /></a>;
+then open <a class="reference external" href="https://rise.readthedocs.io/en/stable/">RISE</a> by clicking the <span class="fa fa-chart-bar"></span> button located in the top bar
+of the Jupyter Notebook interface.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This page includes a number of Python cells holding code needed to set up
+ProbLog ipywidgets.
+You can reveal their content by clicking the <span class="fa fa-plus-circle"></span> buttons, which
+appear towards the right edge of this page.</p>
+</div>
+<div class="cell tag_hide-cell tag_thebe-init docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">Layout</span>
+
+<span class="kn">from</span> <span class="nn">problog.program</span> <span class="kn">import</span> <span class="n">PrologString</span>
+<span class="kn">from</span> <span class="nn">problog</span> <span class="kn">import</span> <span class="n">get_evaluatable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell tag_thebe-init docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_outcome</span><span class="p">(</span><span class="n">pl_dict</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pl_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">pl_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">height</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-.</span><span class="mi">5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="o">.</span><span class="mi">02</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_widget</span><span class="p">(</span><span class="n">default_programme</span><span class="p">):</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">default_programme</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">textbox</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Textarea</span><span class="p">(</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">default_programme</span><span class="p">,</span>
+        <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;ProbLog Programme&#39;</span><span class="p">,</span>
+        <span class="c1"># description=&#39;ProbLog Programme:&#39;,</span>
+        <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;300px&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{:d}</span><span class="s1">px&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">23</span> <span class="o">*</span> <span class="n">lines</span><span class="p">)),</span>
+        <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Evaluate&#39;</span><span class="p">,</span>
+        <span class="c1"># layout=Layout(margin=&#39;4px 0px 0px 90px&#39;),</span>
+        <span class="n">button_style</span><span class="o">=</span><span class="s1">&#39;info&#39;</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="n">problog_programme</span> <span class="o">=</span> <span class="n">textbox</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">problog_programme</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">PrologString</span><span class="p">(</span><span class="n">problog_programme</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">get_evaluatable</span><span class="p">()</span><span class="o">.</span><span class="n">create_from</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+            <span class="n">plot_outcome</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;No ProbLog programme given&#39;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">d</span>
+    <span class="n">button</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">evaluate</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">textbox</span><span class="p">,</span> <span class="n">button</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We illustrate the use of Bayesian networks in ProbLog using the famous <a class="reference external" href="http://www.bnlearn.com/bnrepository/#earthquake">Earthquake</a> example.</p>
+<p>Suppose there is a burglary in our house with probability 0.7 and an earthquake with probability 0.2. Whether our alarm will ring depends on both burglary and earthquake:</p>
+<ul class="simple">
+<li><p>if there is a burglary and an earthquake, the alarm rings with probability 0.9;</p></li>
+<li><p>if there is only a burglary, it rings with probability 0.8;</p></li>
+<li><p>if there is only an earthquake, it rings with probability 0.1;</p></li>
+<li><p>if there is neither a burglary nor an earthquake, the alarm doesn’t ring.</p></li>
+</ul>
+<p>To model this as a Bayesian network, one would use three random variables, <em>burglary</em>, <em>earthquake</em> and <em>alarm</em>, with <em>burglary</em> and <em>earthquake</em> being parents of <em>alarm</em>. To model this in ProbLog, there are two possible solutions: using ‘plain’ ProbLog or using some synthactic sugar called probabilistic clauses and annotated disjunctions. We now explain both solutions.</p>
+<p>digraph alarm1 { burglary -&gt; alarm; earthquake -&gt; alarm; }<br />
+<a class="reference external" href="https://problog.readthedocs.io/en/latest/modeling_basic.html#problog">ProbLog syntax documentation</a></p>
+<div class="section" id="probabilistic-facts">
+<h2>Probabilistic facts<a class="headerlink" href="#probabilistic-facts" title="Permalink to this headline">¶</a></h2>
+<p>In ‘plain’ ProbLog, we can encode the Bayesian network as follows.</p>
+<ul class="simple">
+<li><p>Since <em>burglary</em> and <em>earthquake</em> are random variable without parents, we can simply encode them as probabilistic facts, with the proper probability.</p></li>
+<li><p>To express the dependence of the random variable <em>alarm</em> on its parents <em>burglary</em> and <em>earthquake</em>, we use one Prolog rule for every possible state of the parents.</p>
+<ul>
+<li><p>The first rule covers the case in which <em>burglary</em> and <em>earthquake</em> are both true. The required rule is <code class="docutils literal notranslate"><span class="pre">alarm</span> <span class="pre">:-</span> <span class="pre">burglary,</span> <span class="pre">earthquake,</span> <span class="pre">p_alarm1</span></code>, with <code class="docutils literal notranslate"><span class="pre">p_alarm1</span></code> an auxiliary atom defined by means of the probabilistic fact <code class="docutils literal notranslate"><span class="pre">0.9::p_alarm1</span></code>. The point of adding this atom is to ensure that the probability of <em>alarm</em> in this case will be 0.9 as required.</p></li>
+<li><p>The second rule covers the case that <em>burglary</em> is true but <em>earthquake</em> is false. Note that <em>earthquake</em> being false is encoded using the “+” symbol for negation (as in regular Prolog).</p></li>
+<li><p>The third rule covers the case that <em>burglary</em> is false and <em>earthquake</em> is true.</p></li>
+<li><p>The fourth case (<em>burglary</em> and <em>earthquake</em> are both false) does not require a rule. This is because, according to our Bayesian network, the probability of <em>alarm</em> is 0 in this case.</p></li>
+</ul>
+</li>
+</ul>
+<p>We obtain the following ProbLog program.</p>
+<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_widget</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;0.7::burglary.</span>
+<span class="sd">0.2::earthquake.</span>
+<span class="sd">0.9::p_alarm1.</span>
+<span class="sd">0.8::p_alarm2.</span>
+<span class="sd">0.1::p_alarm3.</span>
+
+<span class="sd">alarm :- burglary, earthquake, p_alarm1.</span>
+<span class="sd">alarm :- burglary, \+earthquake, p_alarm2.</span>
+<span class="sd">alarm :- \+burglary, earthquake, p_alarm3.</span>
+
+<span class="sd">evidence(alarm,true).</span>
+
+<span class="sd">query(burglary).</span>
+<span class="sd">query(earthquake).&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "764ab875dc66401a9cf83bffe513947e", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>When pressing ‘Evaluate’, ProbLog2 calculates the probability of there being a <em>burglary</em> or an <em>earthquake</em>, given the evidence that the <em>alarm</em> rang. The resulting marginals are: <span class="math notranslate nohighlight">\(P(burglary)=0.9896\)</span> and <span class="math notranslate nohighlight">\(P(earthquake)=0.2275\)</span>.</p>
+</div>
+<div class="section" id="probabilistic-clauses">
+<h2>Probabilistic clauses<a class="headerlink" href="#probabilistic-clauses" title="Permalink to this headline">¶</a></h2>
+<p>While the above is a correct encoding of the given Bayesian network, it is perhaps not very intuitive due to the auxiliary atoms. Fortunately, ProbLog2 offers some syntactic sugar called <strong>probabilistic clauses</strong> to encode this in a more readable way. Above, we encoded the information that the conditional probability of an <em>alarm</em> given a <em>burglary</em> and an <em>earthquake</em> equals 0.9 using the rule <code class="docutils literal notranslate"><span class="pre">alarm</span> <span class="pre">:-</span> <span class="pre">burglary,</span> <span class="pre">earthquake,</span> <span class="pre">p_alarm1</span></code>, plus the probabilistic fact <code class="docutils literal notranslate"><span class="pre">0.9::p_alarm1</span></code>. We can replace both with a single probabilistic clause of the form <code class="docutils literal notranslate"><span class="pre">0.9::alarm</span> <span class="pre">:-</span> <span class="pre">burglary,</span> <span class="pre">earthquake</span></code>. This should be read as: if <em>burglary</em> and <em>earthquake</em> are true, this causes <em>alarm</em> to become true with probability 0.9 if there is a <em>burglary</em> and an <em>earthquake</em>. As this example illustrates, a probabilistic clause has a body, just like regular ProbLog rules, and a head. The difference is that now, the head is annotated with a probability. By also using probabilistic clauses for the other rules in the ProbLog encoding of the Bayesian network, we get the following program.</p>
+<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_widget</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;0.7::burglary.</span>
+<span class="sd">0.2::earthquake.</span>
+
+<span class="sd">0.9::alarm :- burglary, earthquake.</span>
+<span class="sd">0.8::alarm :- burglary, \+earthquake.</span>
+<span class="sd">0.1::alarm :- \+burglary, earthquake.</span>
+
+<span class="sd">evidence(alarm,true).</span>
+<span class="sd">query(burglary).</span>
+<span class="sd">query(earthquake).&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "0de78af978d54a59946f2af3aff4f7fe", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>As you can verify by pressing ‘Evaluate’, this returns the same marginals as the ‘plain’ ProbLog encoding: <span class="math notranslate nohighlight">\(P(burglary)=0.9896\)</span> and <span class="math notranslate nohighlight">\(P(earthquake)=0.2275\)</span>. This is not a coincidence: the two programs are equivalent (but the program with probabilistic clauses has the advantage of not needing any auxiliary atoms).</p>
+<p><a class="reference external" href="https://problog.readthedocs.io/en/latest/modeling_basic.html#probabilistic-clauses">Probabilistic clauses documentation</a></p>
+</div>
+<div class="section" id="first-order">
+<h2>First-order<a class="headerlink" href="#first-order" title="Permalink to this headline">¶</a></h2>
+<p>To illustrate the use of <em>first-order</em> ProbLog programs, we show below a first-order extension of the <em>Alarm</em> example.</p>
+<p>digraph alarm2 { burglary -&gt; alarm; earthquake -&gt; alarm; alarm -&gt; “calls(john)”; alarm -&gt; “calls(…)”; alarm -&gt; “calls(mary)”; }<br />
+Suppose there are <span class="math notranslate nohighlight">\(N\)</span> people and each person independently <em>calls</em> the police with a certain probability, depending on the <em>alarm</em> ringing or not: if the <em>alarm</em> rings, the probability of <em>calling</em> is 0.8, otherwise it is 0.1. This can be modelled as follows. We again use probabilistic clauses and show the case <span class="math notranslate nohighlight">\(N=2\)</span> (two people).</p>
+<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_widget</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;person(john).</span>
+<span class="sd">person(mary).</span>
+
+<span class="sd">0.7::burglary.</span>
+<span class="sd">0.2::earthquake.</span>
+
+<span class="sd">0.9::alarm :- burglary, earthquake.</span>
+<span class="sd">0.8::alarm :- burglary, \+earthquake.</span>
+<span class="sd">0.1::alarm :- \+burglary, earthquake.</span>
+
+<span class="sd">0.8::calls(X) :- alarm, person(X).</span>
+<span class="sd">0.1::calls(X) :- \+alarm, person(X).</span>
+
+<span class="sd">evidence(calls(john),true).</span>
+<span class="sd">evidence(calls(mary),true).</span>
+
+<span class="sd">query(burglary).</span>
+<span class="sd">query(earthquake).&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "96bc85a352004e7a8371228b87bc46e3", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>When pressing ‘Evaluate’, ProbLog2 calculates the probability of there being a <em>burglary</em> or an <em>earthquake</em>, given the evidence that both <em>john</em> and <em>mary</em> <em>called</em>. We obtain <span class="math notranslate nohighlight">\(P(burglary)=0.981939\)</span> and <span class="math notranslate nohighlight">\(P(earthquake)=0.226851\)</span>.</p>
+<p>In general, any Boolean Bayesian network can be modeled in ProbLog using the above methodology. This can also be extended to non-Boolean Bayesian networks (in which some variables can take more than two possible values), by using annotated disjunctions with multiple atoms in the head.</p>
+</div>
+<div class="section" id="annotated-disjunctions-dealing-with-multi-valued-variables">
+<h2>Annotated disjunctions: Dealing with multi-valued variables<a class="headerlink" href="#annotated-disjunctions-dealing-with-multi-valued-variables" title="Permalink to this headline">¶</a></h2>
+<p>Since the random variables in the Bayesian network are all Boolean, we only need a single literal in the head of the rules. We can extend the Bayesian network to have a multi-valued variable by indicating the severity of the <em>earthquake</em>. The literal <code class="docutils literal notranslate"><span class="pre">earthquake</span></code> now has three possible values <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">mild</span></code>, <code class="docutils literal notranslate"><span class="pre">heavy</span></code> instead of previously two (no or yes). The probabilities of each value is denoted by the <strong>annotated disjunction</strong> in <code class="docutils literal notranslate"><span class="pre">0.01::earthquake(heavy);</span> <span class="pre">0.19::earthquake(mild);</span> <span class="pre">0.8::earthquake(none)</span></code>. An annotated disjunction is similar to a probabilistic disjunction, but with a different head. Instead of it being one atom annotated with a probability, it is now a disjunction of atoms each annotated with a probability.</p>
+<div class="cell tag_hide-input tag_thebe-init docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_widget</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;person(john).</span>
+<span class="sd">person(mary).</span>
+
+<span class="sd">0.7::burglary.</span>
+<span class="sd">0.01::earthquake(heavy); 0.19::earthquake(mild); 0.8::earthquake(none).</span>
+
+<span class="sd">0.90::alarm :-   burglary, earthquake(heavy).</span>
+<span class="sd">0.85::alarm :-   burglary, earthquake(mild).</span>
+<span class="sd">0.80::alarm :-   burglary, earthquake(none).</span>
+<span class="sd">0.10::alarm :- \+burglary, earthquake(mild).</span>
+<span class="sd">0.30::alarm :- \+burglary, earthquake(heavy).</span>
+
+<span class="sd">0.8::calls(X) :- alarm, person(X).</span>
+<span class="sd">0.1::calls(X) :- \+alarm, person(X).</span>
+
+<span class="sd">evidence(calls(john),true).</span>
+<span class="sd">evidence(calls(mary),true).</span>
+
+<span class="sd">query(burglary).</span>
+<span class="sd">query(earthquake(_)).&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "3ab22b5d68b24a8db0ce8711d47c2181", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p><a class="reference external" href="https://problog.readthedocs.io/en/latest/modeling_basic.html#annotated-disjunctions">Annotated disjunctions documentation</a></p>
+</div>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"0abe4b623ace47ad85f8f20278151ea8": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "TextareaModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "TextareaModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "TextareaView", "continuous_update": true, "description": "", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_cbf54ef884de44f98c7cc4af933340c3", "placeholder": "ProbLog Programme", "rows": null, "style": "IPY_MODEL_69c399f8cf5d42eebbfda45901c92145", "value": "person(john).\nperson(mary).\n\n0.7::burglary.\n0.2::earthquake.\n\n0.9::alarm :- burglary, earthquake.\n0.8::alarm :- burglary, \\+earthquake.\n0.1::alarm :- \\+burglary, earthquake.\n\n0.8::calls(X) :- alarm, person(X).\n0.1::calls(X) :- \\+alarm, person(X).\n\nevidence(calls(john),true).\nevidence(calls(mary),true).\n\nquery(burglary).\nquery(earthquake)."}}, "0de78af978d54a59946f2af3aff4f7fe": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_ef2cca2f2b7b464c96d64a152ed6c6b6", "IPY_MODEL_5aa50decf3044c688ce27717a31173f1"], "layout": "IPY_MODEL_cfc26fac7cca4dd9b8c891e79c435d6d"}}, "11278909180c4d70a39e67b19bfb275c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "230px", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "300px"}}, "151a41e5f36a4fc2bbc170a69c31bc2c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "460px", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "300px"}}, "193369a5d2f04d65b907544980cea923": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "info", "description": "Evaluate", "disabled": false, "icon": "", "layout": "IPY_MODEL_ebaecf28344944298079b8523648f16a", "style": "IPY_MODEL_c1e4177386cb4843a0578c5fa308b5ee", "tooltip": ""}}, "199443447893483cab587c4036eae2dd": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "20ca5d728d334a6fa81420d09db961c6": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3603943b5f3b4067a7831a4d5462b87d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "3ab22b5d68b24a8db0ce8711d47c2181": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_c2ee329fe0a246298cdf9001aafb0b15", "IPY_MODEL_64ab4d3c8cfd4325bd8a15baf932b808"], "layout": "IPY_MODEL_d7e40df4c59a4eaab9f7ac110ddc6d00"}}, "4640931f21a0402988a86a0ab174d914": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "51525452fd9f47ff9b7bb9ed1326f5af": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5aa50decf3044c688ce27717a31173f1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "info", "description": "Evaluate", "disabled": false, "icon": "", "layout": "IPY_MODEL_e773a720df5649f38d3bf4cd1a688d49", "style": "IPY_MODEL_3603943b5f3b4067a7831a4d5462b87d", "tooltip": ""}}, "6218980ef1cd416e81e4dd1f49f95516": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "322px", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "300px"}}, "64ab4d3c8cfd4325bd8a15baf932b808": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "info", "description": "Evaluate", "disabled": false, "icon": "", "layout": "IPY_MODEL_8c8f88d22c864c1b8d50fd906be2543b", "style": "IPY_MODEL_4640931f21a0402988a86a0ab174d914", "tooltip": ""}}, "69c399f8cf5d42eebbfda45901c92145": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "6d266aa09d9a4befb2ed7f6872d06e78": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "info", "description": "Evaluate", "disabled": false, "icon": "", "layout": "IPY_MODEL_f0364d929165477fb7b9d40dcb59b447", "style": "IPY_MODEL_79777ec80c5f4dedb847835c18a5abc4", "tooltip": ""}}, "764ab875dc66401a9cf83bffe513947e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_ec37f2b8818f44959243085f2e7333d1", "IPY_MODEL_193369a5d2f04d65b907544980cea923"], "layout": "IPY_MODEL_51525452fd9f47ff9b7bb9ed1326f5af"}}, "79777ec80c5f4dedb847835c18a5abc4": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "8c8f88d22c864c1b8d50fd906be2543b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "96bc85a352004e7a8371228b87bc46e3": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_0abe4b623ace47ad85f8f20278151ea8", "IPY_MODEL_6d266aa09d9a4befb2ed7f6872d06e78"], "layout": "IPY_MODEL_20ca5d728d334a6fa81420d09db961c6"}}, "a752f04db18844428494b8c13ec5cd58": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "c1e4177386cb4843a0578c5fa308b5ee": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "c2ee329fe0a246298cdf9001aafb0b15": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "TextareaModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "TextareaModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "TextareaView", "continuous_update": true, "description": "", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_151a41e5f36a4fc2bbc170a69c31bc2c", "placeholder": "ProbLog Programme", "rows": null, "style": "IPY_MODEL_a752f04db18844428494b8c13ec5cd58", "value": "person(john).\nperson(mary).\n\n0.7::burglary.\n0.01::earthquake(heavy); 0.19::earthquake(mild); 0.8::earthquake(none).\n\n0.90::alarm :-   burglary, earthquake(heavy).\n0.85::alarm :-   burglary, earthquake(mild).\n0.80::alarm :-   burglary, earthquake(none).\n0.10::alarm :- \\+burglary, earthquake(mild).\n0.30::alarm :- \\+burglary, earthquake(heavy).\n\n0.8::calls(X) :- alarm, person(X).\n0.1::calls(X) :- \\+alarm, person(X).\n\nevidence(calls(john),true).\nevidence(calls(mary),true).\n\nquery(burglary).\nquery(earthquake(_))."}}, "cbf54ef884de44f98c7cc4af933340c3": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "414px", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "300px"}}, "cf208e3717ce458cafcf52af9c5b2930": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "cfc26fac7cca4dd9b8c891e79c435d6d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d7e40df4c59a4eaab9f7ac110ddc6d00": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e773a720df5649f38d3bf4cd1a688d49": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ebaecf28344944298079b8523648f16a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ec37f2b8818f44959243085f2e7333d1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "TextareaModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "TextareaModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "TextareaView", "continuous_update": true, "description": "", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_6218980ef1cd416e81e4dd1f49f95516", "placeholder": "ProbLog Programme", "rows": null, "style": "IPY_MODEL_199443447893483cab587c4036eae2dd", "value": "0.7::burglary.\n0.2::earthquake.\n0.9::p_alarm1.\n0.8::p_alarm2.\n0.1::p_alarm3.\n\nalarm :- burglary, earthquake, p_alarm1.\nalarm :- burglary, \\+earthquake, p_alarm2.\nalarm :- \\+burglary, earthquake, p_alarm3.\n\nevidence(alarm,true).\n\nquery(burglary).\nquery(earthquake)."}}, "ef2cca2f2b7b464c96d64a152ed6c6b6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "TextareaModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "TextareaModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "TextareaView", "continuous_update": true, "description": "", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_11278909180c4d70a39e67b19bfb275c", "placeholder": "ProbLog Programme", "rows": null, "style": "IPY_MODEL_cf208e3717ce458cafcf52af9c5b2930", "value": "0.7::burglary.\n0.2::earthquake.\n\n0.9::alarm :- burglary, earthquake.\n0.8::alarm :- burglary, \\+earthquake.\n0.1::alarm :- \\+burglary, earthquake.\n\nevidence(alarm,true).\nquery(burglary).\nquery(earthquake)."}}, "f0364d929165477fb7b9d40dcb59b447": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "simply-logical/problog-book-template",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./src/text"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../problog_book_template.html" title="previous page">Interactive ProbLog Book Example</a>
+    <a class='right-next' id="next-link" href="bayesian_networks-jnb.html" title="next page">Bayesian Networks (Jupyter NB)</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By <a href="mailto:K.Sokol@bristol.ac.uk">Kacper Sokol</a>, University of Bristol, United Kingdom
+<br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            This book is a template for building interactive ProbLog books with <a href="https://jupyterbook.org/intro.html">Jupyter Book</a>. The source of this book is available on <a href="https://github.com/simply-logical/problog-book-template">GitHub</a>.
+
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'G-BZGV6J36FT', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

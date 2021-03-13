@@ -1,0 +1,5 @@
+src/problog_book_template.md:60: [broken] https://github.com/simply-logical/problog-book-template#building-the-book: Anchor 'building-the-book' not found
+src/text/bayesian_networks-jnb.ipynb:70002: [broken] http://www.bnlearn.com/bnrepository/#earthquake: Anchor 'earthquake' not found
+src/problog_book_template.md:18: [redirected with Found] https://ipywidgets.readthedocs.io/ to https://ipywidgets.readthedocs.io/en/stable/
+src/text/bayesian_networks-jnb.ipynb:30025: [broken] https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html: HTTPSConnectionPool(host='problog-template.simply-logical.space', port=443): Max retries exceeded with url: /slides/bayesian_networks-mnb.slides.html (Caused by SSLError(SSLCertVerificationError("hostname 'problog-template.simply-logical.space' doesn't match either of 'www.github.com', '*.github.com', 'github.com', '*.github.io', 'github.io', '*.githubusercontent.com', 'githubusercontent.com'")))
+src/text/bayesian_networks-jnb.ipynb:30025: [redirected permanently] https://mybinder.org/badge_logo.svg to https://static.mybinder.org/badge_logo.svg
