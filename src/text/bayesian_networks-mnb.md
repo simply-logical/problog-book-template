@@ -84,7 +84,7 @@ These slides are also available as a [book page][bp1], which explains how to
 launch them as a Jupyter Notebook or interactive slides.
 :::
 
-[bp1]: .
+[bp1]: ..
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": ["remove-cell"], "jupyter": {"source_hidden": true, "outputs_hidden": true}, "collapsed": true}
 
@@ -93,7 +93,7 @@ This Jupyter Notebook is also available as a [book page][bp2], which explains
 how to launch this content as *static* and *interactive* slides.
 :::
 
-[bp2]: .
+[bp2]: ..
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": ["purge-cell"], "jupyter": {"source_hidden": true, "outputs_hidden": true}, "collapsed": true}
 
