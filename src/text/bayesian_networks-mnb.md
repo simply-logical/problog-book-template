@@ -4,6 +4,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+rise:
+  start_slideshow_at: beginning
 kernelspec:
   display_name: Python 3
   language: python
@@ -84,7 +86,7 @@ appear towards the right edge of this page.
 
 ```{code-cell} python3
 ---
-tags: [hide-cell, thebe-init]
+tags: [hide-input, thebe-init]
 slideshow:
   slide_type: skip
 ---
@@ -99,7 +101,7 @@ from problog import get_evaluatable
 
 ```{code-cell} python3
 ---
-tags: [hide-cell, thebe-init]
+tags: [hide-input, thebe-init]
 slideshow:
   slide_type: skip
 ---
@@ -138,6 +140,7 @@ def get_widget(default_programme):
             d = {'error': 'No ProbLog programme given'}
         return d
     button.on_click(evaluate)
+    button._click_handlers(button)  # pre-click the button
 
     return widgets.VBox([textbox, button])
 ```
@@ -188,9 +191,9 @@ We obtain the following ProbLog program.
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: ''
+  slide_type: 'skip'
 ---
-get_widget(
+probabilistic_facts = (
 """0.7::burglary.
 0.2::earthquake.
 0.9::p_alarm1.
@@ -206,6 +209,15 @@ evidence(alarm,true).
 query(burglary).
 query(earthquake)."""
 )
+```
+
+```{code-cell} python3
+---
+tags: [hide-input]
+slideshow:
+  slide_type: ''
+---
+get_widget(probabilistic_facts)
 ```
 
 +++ {"slideshow": {"slide_type": ""}}
@@ -226,9 +238,9 @@ While the above is a correct encoding of the given Bayesian network, it is perha
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: subslide
+  slide_type: skip
 ---
-get_widget(
+probabilistic_clauses = (
 """0.7::burglary.
 0.2::earthquake.
 
@@ -240,6 +252,15 @@ evidence(alarm,true).
 query(burglary).
 query(earthquake)."""
 )
+```
+
+```{code-cell} python3
+---
+tags: [hide-input]
+slideshow:
+  slide_type: subslide
+---
+get_widget(probabilistic_clauses)
 ```
 
 +++ {"slideshow": {"slide_type": ""}}
@@ -265,9 +286,9 @@ Suppose there are $N$ people and each person independently *calls* the police wi
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: subslide
+  slide_type: skip
 ---
-get_widget(
+first_order = (
 """person(john).
 person(mary).
 
@@ -289,9 +310,20 @@ query(earthquake)."""
 )
 ```
 
-+++ {"slideshow": {"slide_type": "subslide"}}
+```{code-cell} python3
+---
+tags: [hide-input]
+slideshow:
+  slide_type: subslide
+---
+get_widget(first_order)
+```
+
++++ {"slideshow": {"slide_type": ""}}
 
 When pressing 'Evaluate', ProbLog2 calculates the probability of there being a *burglary* or an *earthquake*, given the evidence that both *john* and *mary* *called*. We obtain $P(burglary)=0.981939$ and $P(earthquake)=0.226851$.
+
++++ {"slideshow": {"slide_type": "subslide"}}
 
 In general, any Boolean Bayesian network can be modeled in ProbLog using the above methodology. This can also be extended to non-Boolean Bayesian networks (in which some variables can take more than two possible values), by using annotated disjunctions with multiple atoms in the head.
 
@@ -307,9 +339,9 @@ Since the random variables in the Bayesian network are all Boolean, we only need
 ---
 tags: [hide-input, thebe-init]
 slideshow:
-  slide_type: subslide
+  slide_type: skip
 ---
-get_widget(
+annotated_disjunctions = (
 """person(john).
 person(mary).
 
@@ -331,6 +363,15 @@ evidence(calls(mary),true).
 query(burglary).
 query(earthquake(_))."""
 )
+```
+
+```{code-cell} python3
+---
+tags: [hide-input]
+slideshow:
+  slide_type: subslide
+---
+get_widget(annotated_disjunctions)
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
