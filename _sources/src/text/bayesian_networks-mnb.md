@@ -38,7 +38,9 @@ This page is written in the [*Markdown Notebook*] format.
 The ProbLog content is displayed with [`ipywidgets`].
 Alternatively, see the [Jupyter Notebook version][notebook] of the
 *Bayesian Networks* tutorial for an example of executing ProbLog code
-directly from Python.
+directly from Python, or the [Percent Notebook version][percent] to see how
+ProbLog code can be executed with a bespoke
+[iPython cell magic command][magic].
 
 You can execute the code blocks enclosed below by launching this page as a
 Jupyter Notebook with MyBinder -- this option is available from the
@@ -68,6 +70,8 @@ of the Jupyter Notebook interface.
 [*Markdown Notebook*]: https://jupyterbook.org/file-types/myst-notebooks.html
 [`ipywidgets`]: https://ipywidgets.readthedocs.io/
 [notebook]: bayesian_networks-jnb
+[percent]: bayesian_networks-pnb
+[magic]: https://ipython.readthedocs.io/en/stable/interactive/magics.html#cell-magics
 [Thebe]: https://jupyterbook.org/interactive/launchbuttons.html#live-interactive-pages-with-thebelab
 [reveal.js]: https://github.com/hakimel/reveal.js/
 [Static Slides (Markdown NB)]: https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html

@@ -15,9 +15,9 @@ different source formats that can be used with the Jupyter Book platform:
 * [Markdown Notebooks]; and
 * [Custom Notebooks] (processed with [Jupytext]).
 
-In addition to Jupyter Book, we use [`ipywidgets`] to embed interactive code
-boxes (useful to operationalise ProbLog code), which can either be executed
-directly in the book with [Thebe] or by launching the selected page as a
+In addition to Jupyter Book, we use [`ipywidgets`] and bespoke
+[iPython cell magic][magic] to embed interactive ProbLog code boxes that
+can either be executed directly in the book with [Thebe] or launched as a
 Jupyter Notebook with [MyBinder].
 Selected pages of the book are accompanied by [reveal.js] slides composed
 from the Jupyter Notebooks and [Markdown Notebooks] that are also sources
@@ -63,6 +63,7 @@ book see the [`README.md`] file included in the [GitHub repository] that
 holds the source of this book.
 :::
 
+[magic]: https://ipython.readthedocs.io/en/stable/interactive/magics.html#cell-magics
 [ProbLog]: https://dtai.cs.kuleuven.be/problog/
 [simply-logical/problog-book-template]: https://github.com/simply-logical/problog-book-template
 [*Jupyter Book*]: https://jupyterbook.org/
