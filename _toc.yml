@@ -9,6 +9,8 @@
   - url: https://problog-template.simply-logical.space/slides/bayesian_networks-jnb.slides.html
     title: 'Static Slides (Jupyter NB)'
   - file: src/text/bayesian_networks-pnb
+  - url: https://problog-template.simply-logical.space/slides/bayesian_networks-pnb.slides.html
+    title: 'Static Slides (Percent NB)'
 
 - part: See Also
   chapters:
