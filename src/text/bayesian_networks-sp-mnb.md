@@ -18,7 +18,7 @@ kernelspec:
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-# Bayesian Networks (Sphinx-ProbLog Extensions) #
+# Bayesian Networks (Sphinx-ProbLog) #
 
 +++ {"slideshow": {"slide_type": "skip"}}
 

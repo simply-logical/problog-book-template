@@ -15,7 +15,7 @@ parts:
     title: 'Static Slides (Percent NB)'
   - file: src/text/bayesian_networks-sp-mnb
   - url: https://problog-template.simply-logical.space/slides/bayesian_networks-sp-mnb.slides.html
-    title: 'Slides (sphinx-problog)'
+    title: 'Slides (Sphinx-ProbLog)'
 
 - caption: See Also
   chapters:
