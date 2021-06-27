@@ -1,0 +1,12 @@
+.problog-edit-solve .pull-right {
+    float: right!important;
+}
+
+.problog-resultpane {
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.problog-resultpane .progress {
+    height: unset;
+}

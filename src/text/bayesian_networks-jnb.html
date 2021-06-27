@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bayesian Networks (Jupyter NB) &#8212; Interactive ProbLog&lt;br&gt;Book Example</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,23 +20,20 @@
 
     
       
-  <link rel="stylesheet"
-    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-problog.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/problog-book-template.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -44,8 +42,14 @@
     <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/mode-problog.js"></script>
+    <script src="../../_static/problog_editor_advanced.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -63,23 +67,14 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Bayesian Networks (Percent NB)" href="bayesian_networks-pnb.html" />
     <link rel="prev" title="Bayesian Networks (Markdown NB)" href="bayesian_networks-mnb.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-<!-- Opengraph tags -->
-<meta property="og:url"         content="http://problog-template.simply-logical.space/src/text/bayesian_networks-jnb.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="Bayesian Networks (Jupyter NB)" />
-<meta property="og:description" content="Bayesian Networks (Jupyter NB)  Note  This page is based on the Bayesian networks ProbLog tutorial, which is executed from within Python using the ProbLog libra" />
-<meta property="og:image"       content="http://problog-template.simply-logical.space/_static/wikidata.svg" />
-
-<meta name="twitter:card" content="summary" />
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -88,32 +83,32 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../../index.html">
-  
-  <img src="../../_static/wikidata.svg" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Interactive ProbLog<br>Book Example</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/wikidata.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Interactive ProbLog<br>Book Example</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../problog_book_template.html">
    Interactive ProbLog Book Example
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Bayesian Networks
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="bayesian_networks-mnb.html">
    Bayesian Networks (Markdown NB)
@@ -122,8 +117,6 @@
  <li class="toctree-l1">
   <a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html">
    Static Slides (Markdown NB)
-   <i class="fas fa-external-link-alt">
-   </i>
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -134,8 +127,6 @@
  <li class="toctree-l1">
   <a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-jnb.slides.html">
    Static Slides (Jupyter NB)
-   <i class="fas fa-external-link-alt">
-   </i>
   </a>
  </li>
  <li class="toctree-l1">
@@ -146,33 +137,43 @@
  <li class="toctree-l1">
   <a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-pnb.slides.html">
    Static Slides (Percent NB)
-   <i class="fas fa-external-link-alt">
-   </i>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bayesian_networks-sp-mnb.html">
+   Bayesian Networks (Sphinx-ProbLog Extensions)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://problog-template.simply-logical.space/slides/bayesian_networks-sp-mnb.slides.html">
+   Slides (sphinx-problog)
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   See Also
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/simply-logical/sphinx-problog">
+   ProbLog Sphinx Extension
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference external" href="https://simply-logical.space/">
    Simply Logical Organisation
-   <i class="fas fa-external-link-alt">
-   </i>
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference external" href="https://github.com/simply-logical/problog-book-template/">
    GitHub Template
-   <i class="fas fa-external-link-alt">
-   </i>
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 </div>
@@ -236,12 +237,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -275,12 +276,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#probabilistic-facts">
    Probabilistic facts
@@ -303,8 +303,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -326,9 +325,11 @@ is executed from within Python using the <a class="reference external" href="htt
 The ProbLog content is executed directly from Python.
 Alternatively, see the <a class="reference internal" href="bayesian_networks-mnb.html"><span class="doc std std-doc">Markdown Notebook version</span></a> of the
 <em>Bayesian Networks</em> tutorial for an example of executing ProbLog code
-with <a class="reference external" href="https://ipywidgets.readthedocs.io/"><code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code></a>, or the <a class="reference internal" href="bayesian_networks-pnb.html"><span class="doc std std-doc">Percent Notebook version</span></a> to see
+with <a class="reference external" href="https://ipywidgets.readthedocs.io/"><code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code></a>; the <a class="reference internal" href="bayesian_networks-pnb.html"><span class="doc std std-doc">Percent Notebook version</span></a> to see
 how ProbLog code can be executed with a bespoke
-<a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#cell-magics">iPython cell magic command</a>.</p>
+<a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#cell-magics">iPython cell magic command</a>; or the
+<a class="reference internal" href="bayesian_networks-sp-mnb.html"><span class="doc std std-doc">Markdown Notebook version</span></a> based on the <a class="reference external" href="https://github.com/simply-logical/sphinx-problog">Sphinx-ProbLog</a>
+extension, which uses <em>native</em>, interactive <a class="reference external" href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a> code boxes.</p>
 <p>You can execute the code blocks enclosed below by launching this page as a
 Jupyter Notebook with MyBinder – this option is available from the
 <em>Launch Menu</em> that appears after hovering the mouse cursor over the
@@ -373,11 +374,11 @@ appear towards the right edge of this page.</p>
     <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pl_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">pl_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">height</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-.</span><span class="mi">5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">.5</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="o">.</span><span class="mi">02</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">.02</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mf">.0</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">evaluate_problog</span><span class="p">(</span><span class="n">programme</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">PrologString</span><span class="p">(</span><span class="n">programme</span><span class="p">)</span>
@@ -395,7 +396,7 @@ appear towards the right edge of this page.</p>
 <li><p>if there is only an earthquake, it rings with probability 0.1;</p></li>
 <li><p>if there is neither a burglary nor an earthquake, the alarm doesn’t ring.</p></li>
 </ul>
-<p>To model this as a Bayesian network, one would use three random variables, <em>burglary</em>, <em>earthquake</em> and <em>alarm</em>, with <em>burglary</em> and <em>earthquake</em> being parents of <em>alarm</em>. To model this in ProbLog, there are two possible solutions: using ‘plain’ ProbLog or using some synthactic sugar called probabilistic clauses and annotated disjunctions. We now explain both solutions.</p>
+<p>To model this as a Bayesian network, one would use three random variables, <em>burglary</em>, <em>earthquake</em> and <em>alarm</em>, with <em>burglary</em> and <em>earthquake</em> being parents of <em>alarm</em>. To model this in ProbLog, there are two possible solutions: using ‘plain’ ProbLog or using some syntactic sugar called probabilistic clauses and annotated disjunctions. We now explain both solutions.</p>
 <p>digraph alarm1 { burglary -&gt; alarm; earthquake -&gt; alarm; }<br />
 <a class="reference external" href="https://problog.readthedocs.io/en/latest/modeling_basic.html#problog">ProbLog syntax documentation</a></p>
 <div class="section" id="probabilistic-facts">
@@ -622,21 +623,16 @@ Suppose there are <span class="math notranslate nohighlight">\(N\)</span> people
 
       </div>
     </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+  
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BZGV6J36FT"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('config', 'G-BZGV6J36FT');
+                </script>
 
-
-    
-    <!-- Google Analytics -->
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'G-BZGV6J36FT', 'auto');
-      ga('set', 'anonymizeIp', true);
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- End Google Analytics -->
-    
   </body>
 </html>
