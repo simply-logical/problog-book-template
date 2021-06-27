@@ -1,5 +1,5 @@
 .problog-edit-solve .pull-right {
-    /*float: right!important;*/
+    float: none;  /*right!important*/
 }
 
 .problog-resultpane {
