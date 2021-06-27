@@ -48,6 +48,8 @@ launch_buttons:
   thebe: true
 
 sphinx:
+  extra_extensions:
+    - sphinx_problog.problog
   config:
     html_extra_path:
       - README.md
@@ -66,3 +68,6 @@ sphinx:
     copybutton_prompt_text: ''
     copybutton_only_copy_prompt_lines: false
     copybutton_remove_prompts: false
+    # Configure Sphinx-ProbLog extension
+    sphinx_problog_execution_server_url: https://verne.cs.kuleuven.be/problog/api/
+    sphinx_problog_code_directory: src/code/

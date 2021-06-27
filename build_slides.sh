@@ -44,3 +44,4 @@ build_exec_deck () {
 build_exec_deck bayesian_networks-mnb.md
 build_exec_deck bayesian_networks-jnb.ipynb
 build_exec_deck bayesian_networks-pnb.py
+build_deck bayesian_networks-sp-mnb.md

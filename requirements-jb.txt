@@ -1,1 +1,2 @@
-jupyter-book>=0.10.0
+jupyter-book>=0.11.0
+sphinx-problog>=0.1

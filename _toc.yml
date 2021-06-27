@@ -1,6 +1,8 @@
-- file: src/problog_book_template
+format: jb-book
+root: src/problog_book_template
 
-- part: Bayesian Networks
+parts:
+- caption: Bayesian Networks
   chapters:
   - file: src/text/bayesian_networks-mnb
   - url: https://problog-template.simply-logical.space/slides/bayesian_networks-mnb.slides.html
@@ -11,9 +13,14 @@
   - file: src/text/bayesian_networks-pnb
   - url: https://problog-template.simply-logical.space/slides/bayesian_networks-pnb.slides.html
     title: 'Static Slides (Percent NB)'
+  - file: src/text/bayesian_networks-sp-mnb
+  - url: https://problog-template.simply-logical.space/slides/bayesian_networks-sp-mnb.slides.html
+    title: 'Slides (sphinx-problog)'
 
-- part: See Also
+- caption: See Also
   chapters:
+  - url: https://github.com/simply-logical/sphinx-problog
+    title: 'ProbLog Sphinx Extension'
   - url: https://simply-logical.space/
     title: 'Simply Logical Organisation'
   - url: https://github.com/simply-logical/problog-book-template/

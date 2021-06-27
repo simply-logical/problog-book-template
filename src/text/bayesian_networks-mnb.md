@@ -38,9 +38,11 @@ This page is written in the [*Markdown Notebook*] format.
 The ProbLog content is displayed with [`ipywidgets`].
 Alternatively, see the [Jupyter Notebook version][notebook] of the
 *Bayesian Networks* tutorial for an example of executing ProbLog code
-directly from Python, or the [Percent Notebook version][percent] to see how
+directly from Python; the [Percent Notebook version][percent] to see how
 ProbLog code can be executed with a bespoke
-[iPython cell magic command][magic].
+[iPython cell magic command][magic]; or the
+[Markdown Notebook version][sp-markdown] based on the [Sphinx-ProbLog]
+extension, which uses *native*, interactive [ProbLog] code boxes.
 
 You can execute the code blocks enclosed below by launching this page as a
 Jupyter Notebook with MyBinder -- this option is available from the
@@ -71,6 +73,9 @@ of the Jupyter Notebook interface.
 [`ipywidgets`]: https://ipywidgets.readthedocs.io/
 [notebook]: bayesian_networks-jnb
 [percent]: bayesian_networks-pnb
+[sp-markdown]: bayesian_networks-sp-mnb
+[Sphinx-ProbLog]: https://github.com/simply-logical/sphinx-problog
+[ProbLog]: https://dtai.cs.kuleuven.be/problog/
 [magic]: https://ipython.readthedocs.io/en/stable/interactive/magics.html#cell-magics
 [Thebe]: https://jupyterbook.org/interactive/launchbuttons.html#live-interactive-pages-with-thebelab
 [reveal.js]: https://github.com/hakimel/reveal.js/
@@ -189,7 +194,7 @@ Suppose there is a burglary in our house with probability 0.7 and an earthquake 
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-To model this as a Bayesian network, one would use three random variables, *burglary*, *earthquake* and *alarm*, with *burglary* and *earthquake* being parents of *alarm*. To model this in ProbLog, there are two possible solutions: using 'plain' ProbLog or using some synthactic sugar called probabilistic clauses and annotated disjunctions. We now explain both solutions.
+To model this as a Bayesian network, one would use three random variables, *burglary*, *earthquake* and *alarm*, with *burglary* and *earthquake* being parents of *alarm*. To model this in ProbLog, there are two possible solutions: using 'plain' ProbLog or using some syntactic sugar called probabilistic clauses and annotated disjunctions. We now explain both solutions.
 
 digraph alarm1 { burglary -> alarm; earthquake -> alarm; }  
 [ProbLog syntax documentation]
