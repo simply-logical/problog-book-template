@@ -284,25 +284,31 @@
 The source of this book can be found in the
 <a class="reference external" href="https://github.com/simply-logical/problog-book-template">simply-logical/problog-book-template</a> GitHub repository, which can also serve
 as a template and a starting point for building your own ProbLog book.
-This book repeats the same content on <em>three</em> consecutive pages to exemplify
-different source formats that can be used with the Jupyter Book platform:</p>
+This book repeats the same content on <em>four</em> consecutive pages to exemplify
+different source formats and technologies that can be used with the
+Jupyter Book platform:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://jupyterbook.org/file-types/notebooks.html">Jupyter Notebooks</a>;</p></li>
-<li><p><a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">Markdown Notebooks</a>; and</p></li>
-<li><p><a class="reference external" href="https://jupyterbook.org/file-types/jupytext.html">Custom Notebooks</a> (processed with <a class="reference external" href="https://github.com/mwouts/jupytext">Jupytext</a>).</p></li>
+<li><p><a class="reference external" href="https://jupyterbook.org/file-types/notebooks.html">Jupyter Notebooks</a> – <a class="reference internal" href="text/bayesian_networks-jnb.html"><span class="doc std std-doc">here</span></a>;</p></li>
+<li><p><a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">Markdown Notebooks</a> – <a class="reference internal" href="text/bayesian_networks-mnb.html"><span class="doc std std-doc">here</span></a>;</p></li>
+<li><p><a class="reference external" href="https://jupyterbook.org/file-types/jupytext.html">Custom Notebooks</a> (processed with <a class="reference external" href="https://github.com/mwouts/jupytext">Jupytext</a>) –
+<a class="reference internal" href="text/bayesian_networks-pnb.html"><span class="doc std std-doc">here</span></a>; and</p></li>
+<li><p><a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">Markdown source</a> (utilising the <a class="reference external" href="https://github.com/simply-logical/sphinx-problog">sphinx-problog</a> extension) –
+<a class="reference internal" href="text/bayesian_networks-sp-mnb.html"><span class="doc std std-doc">here</span></a>.</p></li>
 </ul>
 <p>In addition to Jupyter Book, we use <a class="reference external" href="https://ipywidgets.readthedocs.io/"><code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code></a> and bespoke
 <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#cell-magics">iPython cell magic</a> to embed interactive ProbLog code boxes that
 can either be executed directly in the book with <a class="reference external" href="https://jupyterbook.org/interactive/launchbuttons.html#live-interactive-pages-with-thebelab">Thebe</a> or launched as a
-Jupyter Notebook with <a class="reference external" href="https://jupyterbook.org/interactive/launchbuttons.html#binder-buttons-for-your-pages">MyBinder</a>.
-Selected pages of the book are accompanied by <a class="reference external" href="https://github.com/hakimel/reveal.js/">reveal.js</a> slides composed
-from the Jupyter Notebooks and <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">Markdown Notebooks</a> that are also sources
-underlying some sections of this book.
+Jupyter Notebook with <a class="reference external" href="https://jupyterbook.org/interactive/launchbuttons.html#binder-buttons-for-your-pages">MyBinder</a> – these approaches require a running
+Python kernel to make the ProbLog code executable.
+Alternatively, the <a class="reference external" href="https://github.com/simply-logical/sphinx-problog">sphinx-problog</a> Jupyter Book extension allows to
+embed <em>native</em> interactive ProbLog code boxes – no Python required.
+All pages of the book are accompanied by <a class="reference external" href="https://github.com/hakimel/reveal.js/">reveal.js</a> slides composed
+from the sources underlying the respective sections of this book.
 Static slides are built with the <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbconvert</span></code> conversion tool – see
 the <a class="reference external" href="https://github.com/simply-logical/problog-book-template/blob/master/build_slides.sh"><code class="docutils literal notranslate"><span class="pre">build_slides.sh</span></code></a> script for more details.
 Slides can also be launched with <a class="reference external" href="https://rise.readthedocs.io/en/stable/">RISE</a> from a Jupyter Notebook through
 MyBinder to allow interactive and executable content.
-Therefore, in our workflow a single source file produces:</p>
+Therefore, in our workflow a single source file can possibly produce:</p>
 <ul class="simple">
 <li><p>computational notebooks;</p></li>
 <li><p>static and interactive slides; and</p></li>
@@ -312,8 +318,10 @@ Therefore, in our workflow a single source file produces:</p>
 <p class="admonition-title">Note</p>
 <p>To learn more about executing ProbLog programmes from within Python see the
 <a class="reference external" href="https://dtai.cs.kuleuven.be/problog/tutorial/advanced/01_python_interface.html"><em>ProbLog as a Python library</em></a> tutorial.
-The content of this book and its accompanying slides and notebook
-comes from the <a class="reference external" href="https://dtai.cs.kuleuven.be/problog/tutorial/basic/02_bayes.html"><em>Bayesian networks</em></a> ProbLog tutorial.</p>
+To discover how to embed <em>native</em> ProbLog code boxes see the
+<a class="reference external" href="https://github.com/simply-logical/sphinx-problog">sphinx-problog</a> Jupyter Book extension.
+The content of this book and its accompanying slides and notebooks
+come from the <a class="reference external" href="https://dtai.cs.kuleuven.be/problog/tutorial/basic/02_bayes.html"><em>Bayesian networks</em></a> ProbLog tutorial.</p>
 </div>
 </div>
 <div class="section" id="building-the-book">
@@ -321,10 +329,13 @@ comes from the <a class="reference external" href="https://dtai.cs.kuleuven.be/p
 <p>To build this book you need <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code> and a collection of Python
 packages specific to its content:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code> – for interactive ProbLog code boxes;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">jupytext</span></code> – to launch pages written in <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">Markdown Notebooks</a> in Jupyter;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code> – for Python-based interactive ProbLog code boxes;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jupytext</span></code> – to launch pages written in <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">Markdown Notebooks</a>
+in Jupyter;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">notebook</span></code> – to run Jupyter Notebook;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">problog</span></code> – for executing ProbLog programmes; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">problog</span></code> – for executing ProbLog programmes from within Python;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-problog</span></code> – for creating <em>native</em> ProbLog code bexes within
+Jupyter Book; and</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">rise</span></code> – to launch interactive and executable reveal.js presentations.</p></li>
 </ul>
 <p>You can either install them individually with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">...</span></code> or by using
